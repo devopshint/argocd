@@ -24,20 +24,20 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx inspect default --bootstrap
-          docker buildx build --file Dockerfile -t akashmore947/my-app-image:$GITHUB_REF_NAME-$GITHUB_SHA --load .
+          docker buildx build --file Dockerfile -t devopshint/my-app-image:$GITHUB_REF_NAME-$GITHUB_SHA --load .
 
 
       - name: Push Docker image to Docker Hub
         run: |
-          echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username akashmore947 --password-stdin
-          docker push akashmore947/my-app-image:$GITHUB_REF_NAME-$GITHUB_SHA
+          echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username devopshint --password-stdin
+          docker push devopshint/my-app-image:$GITHUB_REF_NAME-$GITHUB_SHA
 
       - name: Update manifest file
         run: |
           # Assuming you have a manifest file named k8s.yaml
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@gmail.com"
-          yq eval '.spec.template.spec.containers[0].image = "akashmore947/my-app-image:${{ env.GITHUB_BRANCH }}"' -i deployments/deployment.yml
+          yq eval '.spec.template.spec.containers[0].image = "devopshint/my-app-image:${{ env.GITHUB_BRANCH }}"' -i deployments/deployment.yml
 
           git pull
           git add .
