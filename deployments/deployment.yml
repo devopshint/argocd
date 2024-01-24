@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-deployment
+  template:
+    metadata:
+      labels:
+        app: my-deployment
+    spec:
+      containers:
+        - name: my-app-container
+          image: akashmore947/my-app-image:master-8c6b04557abe32298728ccdf05dd1cfe5b96f159
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
