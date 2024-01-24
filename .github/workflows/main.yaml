@@ -35,9 +35,9 @@ jobs:
       - name: Update manifest file
         run: |
           # Assuming you have a manifest file named k8s.yaml
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@gmail.com"
-          yq eval '.spec.template.spec.containers[0].image = "devopshint/my-app-image:${{ env.GITHUB_BRANCH }}"' -i deployments/deployment.yml
+          git config user.name "devopshint"
+          git config user.email "devopshint@gmail.com"
+          yq eval '.spec.template.spec.containers[0].image = "devopshint/my-app-image:main"' -i deployments/deployment.yml
 
           git pull
           git add .
