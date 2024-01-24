@@ -17,4 +17,4 @@ spec:
           image: devopshint/my-app-image:main-2cffb8a5d82eec5a1d14de337434624c7acd0604
           imagePullPolicy: Always
           ports:
-            - containerPort: 8000
+            - containerPort: 3000
